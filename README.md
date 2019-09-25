@@ -20,10 +20,17 @@
 ###############################################
 ```
 
+### 사전설치
+```html
+  apt-get install sox libsox-fmt-mp3
+  cp -rp crpbxPollyTts /var/lib/asterisk/agi-bin/
+  chown -R asterisk. /var/lib/asterisk/agi-bin/crpbxPollyTts
+```
+
 ### 다운로드 및 설치
 ```html
   git clone https://github.com/ringneck/crpbxPollyTts.git
-   cp -rp crpbxPollyTts /var/lib/asterisk/agi-bin/
+  cp -rp crpbxPollyTts /var/lib/asterisk/agi-bin/
   chown -R asterisk. /var/lib/asterisk/agi-bin/crpbxPollyTts
 ```
 
@@ -45,14 +52,19 @@
 ;;;;; AGI(crpbxPollyTts.php,"${TTS}") ;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 exten => 55555,1,NoOp(Test AWS Polly TTS !!!)
+ same => n,Answer()
  same => n,Set(YEAR=${STRFTIME(${EPOCH},,%Y)})
  same => n,Set(MONTH=${STRFTIME(${EPOCH},,%m)})
+ same => n,ExecIf($["${MONTH:0:1}" = "0"]?Set(MONTH=${MONTH:-1}):Set(MONTH=${MONTH}))
  same => n,Set(DAY=${STRFTIME(${EPOCH},,%d)})
+ same => n,ExecIf($["${DAY:0:1}" = "0"]?Set(DAY=${DAY:-1}):Set(DAY=${DAY}))
  same => n,Set(HOUR=${STRFTIME(${EPOCH},,%H)})
  same => n,Set(MINUTE=${STRFTIME(${EPOCH},,%M)})
- same => n,Set(TIMETTS=YEAR년 MONTH월 DAY일 HOUR시 MINUTE분입니다. 전화 주셔서 감사합니다)
- same => n,Set(TTSINTRO=안녕하세요? 제 이름은 서연이에요. 제 목소리 이쁜가요 ? 폴리 연동이 잘 되었습니다)
- same => n,Set(TTS=${TIMETTS} ${TTSINTRO})
+ same => n,Set(TIMETTS=안녕하세요? 지금 시간은 ${YEAR}년, ${MONTH}월, ${DAY}일, ${HOUR}시, ${MINUTE}분, 입니다 )
+ same => n,Set(TTSINTRO=제 이름은 알렉사가 아니고, 서연이에요. 제 목소리 어 떠세요?  이쁜가요? )
+ same => n,Set(TTSWORD=고객에게 얼쑤의 기운을 드립니다. 얼쑤!  지화자!)
+ same => n,Set(TTS=${TIMETTS}, ${TTSINTRO}, ${TTSWORD})
+ same => n,AGI(crpbxPollyTts.php,"=${TTS})
  same => n,Hangup()
 ```
 
@@ -62,3 +74,5 @@ exten => 55555,1,NoOp(Test AWS Polly TTS !!!)
 root@crpbx:~# asterisk -vvvvr
 crpbx*CLI> reload
 ```
+
+### 다이얼 5555
