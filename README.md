@@ -36,9 +36,10 @@
  $Amazon_secret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 ```
 
-### 커스텀 다이얼플랜 적용 및 테스트
+### 커스텀 다이얼플랜 추가 
 ```html
- vim /etc/asterisk/extensions_override_elastix.conf
+ vim /etc/asterisk/extensions_custom.conf
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;; AMAZON AWS POLLY TTS ;;;;;;;;;;
 ;;;;; AGI(crpbxPollyTts.php,"${TTS}") ;;;;;;
@@ -54,4 +55,10 @@ exten => 55555,1,NoOp(Test AWS Polly TTS !!!)
  same => n,Set(TTS=${TIMETTS} ${TTSINTRO})
  same => n,Hangup()
 ```
+
+### 적용 및 테스트
+
+```html
+root@crpbx:~# asterisk -vvvvr
+crpbx*CLI> reload
 ```
