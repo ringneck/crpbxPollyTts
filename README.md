@@ -1,6 +1,6 @@
 # crpbxPollyTts (AMAZON AWS POLLY ON CRPBX)
 
-## http://www.olsoo.com
+### http://www.olsoo.com
 
 ```html
 ###############################################
@@ -20,17 +20,38 @@
 ###############################################
 ```
 
-## 다운로드 및 설치
+### 다운로드 및 설치
 ```html
   git clone https://github.com/ringneck/crpbxPollyTts.git
    cp -rp crpbxPollyTts /var/lib/asterisk/agi-bin/
   chown -R asterisk. /var/lib/asterisk/agi-bin/crpbxPollyTts
 ```
 
-## 설졍 변경 /var/lib/asterisk/agi-bin/crpbxPollyTts/crpbxPollyTts.php
-### Amazon_key, Amazon_secret
+### 설정 변경 /var/lib/asterisk/agi-bin/crpbxPollyTts/crpbxPollyTts.php
+#### Amazon_key, Amazon_secret
 
 ```html
+ vim /var/lib/asterisk/agi-bin/crpbxPollyTts/crpbxPollyTts.php
  $Amazon_key    = "XXXXXXXXXXXXXXXXXXXX";
  $Amazon_secret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+```
+
+### 커스텀 다이얼플랜 적용 및 테스트
+```html
+ vim /etc/asterisk/extensions_override_elastix.conf
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;; AMAZON AWS POLLY TTS ;;;;;;;;;;
+;;;;; AGI(crpbxPollyTts.php,"${TTS}") ;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+exten => 55555,1,NoOp(Test AWS Polly TTS !!!)
+ same => n,Set(YEAR=${STRFTIME(${EPOCH},,%Y)})
+ same => n,Set(MONTH=${STRFTIME(${EPOCH},,%m)})
+ same => n,Set(DAY=${STRFTIME(${EPOCH},,%d)})
+ same => n,Set(HOUR=${STRFTIME(${EPOCH},,%H)})
+ same => n,Set(MINUTE=${STRFTIME(${EPOCH},,%M)})
+ same => n,Set(TIMETTS=YEAR년 MONTH월 DAY일 HOUR시 MINUTE분입니다. 전화 주셔서 감사합니다)
+ same => n,Set(TTSINTRO=안녕하세요? 제 이름은 서연이에요. 제 목소리 이쁜가요 ? 폴리 연동이 잘 되었습니다)
+ same => n,Set(TTS=${TIMETTS} ${TTSINTRO})
+ same => n,Hangup()
+```
 ```
