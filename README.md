@@ -20,6 +20,13 @@
 ###############################################
 ```
 
+### 사전준비 
+```html
+   아마존 AWS콘솔에서 API 접근권한 추가
+   Identity and Access Management (IAM)
+   arn:aws:iam::aws:policy/AmazonPollyFullAccess
+```
+
 ### 사전설치
 ```html
   apt-get -y update
@@ -36,11 +43,11 @@
   chown -R asterisk. /var/lib/asterisk/agi-bin/vendor/
 ```
 
-### 설정 변경 /var/lib/asterisk/agi-bin/crpbxPollyTts/crpbxPollyTts.php
+### 설정 변경 /var/lib/asterisk/agi-bin/crpbxPollyTts.php 안에 아래 Amazon 수정
 #### Amazon_key, Amazon_secret
 
 ```html
- vim /var/lib/asterisk/agi-bin/crpbxPollyTts/crpbxPollyTts.php
+ vim /var/lib/asterisk/agi-bin/crpbxPollyTts.php
  $Amazon_key    = "XXXXXXXXXXXXXXXXXXXX";
  $Amazon_secret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 ```
