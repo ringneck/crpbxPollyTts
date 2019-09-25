@@ -20,3 +20,10 @@
 ###############################################
 ```
 
+# 다운로드 및 설치
+```html
+git clone https://github.com/ringneck/crpbxPollyTts.git
+cp -rp crpbxPollyTts /var/lib/asterisk/agi-bin/
+chown -R asterisk. /var/lib/asterisk/agi-bin/crpbxPollyTts
+```
+
