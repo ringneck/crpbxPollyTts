@@ -24,13 +24,13 @@
 ```html
   apt-get -y update
   apt-get install sox libsox-fmt-mp3
-  cp -rp crpbxPollyTts /var/lib/asterisk/agi-bin/
 ```
 
 ### 다운로드 및 설치
 ```html
   git clone https://github.com/ringneck/crpbxPollyTts.git
   cp -rp crpbxPollyTts/crpbxPollyTts.php /var/lib/asterisk/agi-bin/
+  chmod 755 /var/lib/asterisk/agi-bin/crpbxPollyTts.php
   cp -rp crpbxPollyTts/vendor /var/lib/asterisk/agi-bin/
   chown -R asterisk. /var/lib/asterisk/agi-bin/vendor
   chown -R asterisk. /var/lib/asterisk/agi-bin/vendor/
@@ -77,4 +77,4 @@ root@crpbx:~# asterisk -vvvvr
 crpbx*CLI> reload
 ```
 
-### 다이얼 5555
+### 다이얼 55555
