@@ -30,8 +30,10 @@
 ### 다운로드 및 설치
 ```html
   git clone https://github.com/ringneck/crpbxPollyTts.git
-  cp -rp crpbxPollyTts /var/lib/asterisk/agi-bin/
-  chown -R asterisk. /var/lib/asterisk/agi-bin/crpbxPollyTts
+  cp -rp crpbxPollyTts/crpbxPollyTts.php /var/lib/asterisk/agi-bin/
+  cp -rp crpbxPollyTts/vendor /var/lib/asterisk/agi-bin/
+  chown -R asterisk. /var/lib/asterisk/agi-bin/vendor
+  chown -R asterisk. /var/lib/asterisk/agi-bin/vendor/
 ```
 
 ### 설정 변경 /var/lib/asterisk/agi-bin/crpbxPollyTts/crpbxPollyTts.php
