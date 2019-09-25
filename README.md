@@ -22,9 +22,9 @@
 
 ### 사전설치
 ```html
+  apt-get -y update
   apt-get install sox libsox-fmt-mp3
   cp -rp crpbxPollyTts /var/lib/asterisk/agi-bin/
-  chown -R asterisk. /var/lib/asterisk/agi-bin/crpbxPollyTts
 ```
 
 ### 다운로드 및 설치
