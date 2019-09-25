@@ -147,6 +147,7 @@ $speech = array('Text' => $text2say,
   'OutputFormat' => 'mp3',
   'TextType' => 'text',
   //'VoiceId' => 'Joanna');
+  //Seoyeon = 한국어 TTS
   'VoiceId' => 'Seoyeon');
 
 if ($debug) :
